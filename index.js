@@ -12,7 +12,7 @@ exports.thumbnail = (event, context) => {
   const bucketName = event.bucket;
   const size = "64x64"
   const bucket = gcs.bucket(bucketName);
-  const topicName = "REPLACE_WITH_YOUR_TOPIC ID";
+  //const topicName = "REPLACE_WITH_YOUR_TOPIC ID";
   const pubsub = new PubSub();
   if ( fileName.search("64x64_thumbnail") == -1 ){
     // doesn't have a thumbnail, get the filename extension
@@ -42,7 +42,8 @@ exports.thumbnail = (event, context) => {
               {
                 contentType: 'image/'+ filename_ext.toLowerCase()
               }, function(err, apiResponse) {});
-              pubsub
+              console.log(`thumbnail created`);
+              /*pubsub
                 .topic(topicName)
                 .publisher()
                 .publish(Buffer.from(newFilename))
@@ -51,7 +52,7 @@ exports.thumbnail = (event, context) => {
                 })
                 .catch(err => {
                   console.error('ERROR:', err);
-                });
+                });*/
 
           });
       });
